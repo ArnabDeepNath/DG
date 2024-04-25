@@ -159,7 +159,7 @@ body {
 .Product .timer {
   width: 50px;
   height: 2rem;
-  background: #def4c6;
+  background-color: #def4c6;
   color: #1b512d;
   font-size: 1.5rem;
   font-weight: 500;
