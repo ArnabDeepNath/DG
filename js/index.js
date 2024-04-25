@@ -88,6 +88,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (response.ok) {
       const timerData = await response.json();
+      console.log(timerData);
       displayTimer(timerData.startTime, timerData.duration);
     } else {
       console.error('Failed to fetch timer data');
