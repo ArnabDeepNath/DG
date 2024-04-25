@@ -10,13 +10,16 @@ form.addEventListener('submit', async (e) => {
   const password = formData.get('password');
 
   try {
-    const response = await fetch('/auth/register', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://dg-backend-9135cdee7c9e.herokuapp.com/auth/register',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password }),
       },
-      body: JSON.stringify({ username, email, password }),
-    });
+    );
     const data = await response.json();
     if (response.ok) {
       message.textContent = 'Registration successful. Please log in.';
