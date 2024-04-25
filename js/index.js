@@ -4,7 +4,7 @@ const message = document.getElementById('message');
 
 startButton.addEventListener('click', async () => {
   const wish = document.getElementById('wish').value;
-  const delayTime = parseInt(document.getElementById('delayInput').value);
+  const duration = parseInt(document.getElementById('delayInput').value);
 
   try {
     // Get the token from localStorage
@@ -19,13 +19,13 @@ startButton.addEventListener('click', async () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`, // Include the token in the request headers
         },
-        body: JSON.stringify({ wish, duration: delayTime, token: token }),
+        body: JSON.stringify({ wish, duration }),
       },
     );
 
     if (response.ok) {
       // Timer started successfully, display countdown
-      displayTimer(delayTime);
+      displayTimer(duration);
       message.textContent = 'Timer started successfully.';
     } else {
       message.textContent = 'Failed to start timer.';
