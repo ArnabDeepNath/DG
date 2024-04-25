@@ -156,6 +156,13 @@ body {
   text-transform: uppercase;
 }
 
+.Product .timer {
+  background: #def4c6;
+  color: #1b512d;
+  font-size: large;
+  font-weight: 500;
+}
+
 .About_us h1 {
   margin: 5%;
   color: #1b512d;
