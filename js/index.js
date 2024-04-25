@@ -1,37 +1,44 @@
-// index.js
+const startButton = document.getElementById('startBtn');
+const timerContainer = document.querySelector('.timer');
+const message = document.getElementById('message');
 
-// Function to fetch timer data from the backend
-async function fetchTimerData() {
+startButton.addEventListener('click', async () => {
+  const wish = document.getElementById('wishInput').value;
+  const delayTime = parseInt(document.getElementById('delayInput').value);
+
   try {
+    // Get the token from localStorage
     const token = localStorage.getItem('token');
+
+    // Send request to start the timer
     const response = await fetch(
       'https://dg-backend-9135cdee7c9e.herokuapp.com/start-timer/start-timer',
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Include the token in the request headers
         },
+        body: JSON.stringify({ wish, duration: delayTime }),
       },
     );
+
     if (response.ok) {
-      const data = await response.json();
-      return data.timerData;
+      // Timer started successfully, display countdown
+      displayTimer(delayTime);
+      message.textContent = 'Timer started successfully.';
     } else {
-      console.error('Failed to fetch timer data');
-      return null;
+      message.textContent = 'Failed to start timer.';
     }
   } catch (error) {
-    console.error('Error fetching timer data:', error);
-    return null;
+    console.error('Error:', error);
+    message.textContent = 'An error occurred. Please try again.';
   }
-}
+});
 
-// Function to display the timer
 function displayTimer(duration) {
-  const timerContainer = document.querySelector('.timer');
   const startTime = Date.now();
-  const endTime = startTime + duration * 1000;
+  const endTime = startTime + duration * 1000; // Convert seconds to milliseconds
 
   function updateTimer() {
     const currentTime = Date.now();
@@ -57,11 +64,3 @@ function displayTimer(duration) {
 
   updateTimer();
 }
-
-// On page load, fetch timer data and display the timer
-document.addEventListener('DOMContentLoaded', async () => {
-  const timerData = await fetchTimerData();
-  if (timerData) {
-    displayTimer(timerData.duration);
-  }
-});
