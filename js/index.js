@@ -1,58 +1,44 @@
-const startButton = document.querySelector('.product_btn');
-const timerContainer = document.querySelector('.timer');
-const message = document.getElementById('message');
+// index.js
 
-startButton.addEventListener('click', async () => {
-  const wish = document.querySelector('input[name="wish"]').value;
-  const delayTime = parseInt(
-    document.querySelector('input[name="delayTime"]').value,
-  );
-
+// Function to fetch timer data from the backend
+async function fetchTimerData() {
   try {
-    // Get the token from localStorage
     const token = localStorage.getItem('token');
-
-    // Send request to start the timer
     const response = await fetch(
       'https://dg-backend-9135cdee7c9e.herokuapp.com/start-timer/start-timer',
       {
-        method: 'POST',
+        method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`, // Include the token in the request headers
+          Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ wish, duration: delayTime }), // Include the wish in the request body
       },
     );
-
     if (response.ok) {
-      // Timer started successfully, display countdown
-      displayTimer(delayTime);
-      message.textContent = 'Timer started successfully.';
+      const data = await response.json();
+      return data.timerData;
     } else {
-      message.textContent = 'Failed to start timer.';
+      console.error('Failed to fetch timer data');
+      return null;
     }
   } catch (error) {
-    console.error('Error:', error);
-    message.textContent = 'An error occurred. Please try again.';
+    console.error('Error fetching timer data:', error);
+    return null;
   }
-});
+}
 
+// Function to display the timer
 function displayTimer(duration) {
-  let endTime = localStorage.getItem('endTime');
-  const currentTime = Date.now();
-
-  if (!endTime) {
-    endTime = currentTime + duration * 1000;
-    localStorage.setItem('endTime', endTime);
-  }
+  const timerContainer = document.querySelector('.timer');
+  const startTime = Date.now();
+  const endTime = startTime + duration * 1000;
 
   function updateTimer() {
+    const currentTime = Date.now();
     const remainingTime = endTime - currentTime;
 
     if (remainingTime <= 0) {
       timerContainer.textContent = 'Timer expired!';
-      localStorage.removeItem('endTime'); // Remove the end time from local storage
       return;
     }
 
@@ -72,10 +58,10 @@ function displayTimer(duration) {
   updateTimer();
 }
 
-// Call displayTimer function when the page loads
-window.addEventListener('load', () => {
-  const duration = parseInt(localStorage.getItem('duration'), 10);
-  if (duration) {
-    displayTimer(duration);
+// On page load, fetch timer data and display the timer
+document.addEventListener('DOMContentLoaded', async () => {
+  const timerData = await fetchTimerData();
+  if (timerData) {
+    displayTimer(timerData.duration);
   }
 });
