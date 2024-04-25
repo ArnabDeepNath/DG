@@ -157,11 +157,13 @@ body {
 }
 
 .Product .timer {
+  width: 50%;
+  height: 2rem;
   background: #def4c6;
   color: #1b512d;
   font-size: 1.5rem;
   font-weight: 500;
-  margin-right: 30%;
+  margin-right: 10%;
 }
 
 .About_us h1 {
