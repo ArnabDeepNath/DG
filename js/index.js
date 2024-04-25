@@ -36,9 +36,8 @@ startButton.addEventListener('click', async () => {
   }
 });
 
-function displayTimer(duration) {
-  const startTime = Date.now();
-  const endTime = startTime + duration * 1000; // Convert seconds to milliseconds
+function displayTimer(startTime, duration) {
+  const endTime = startTime + duration; // Duration is already in milliseconds
 
   function updateTimer() {
     const currentTime = Date.now();
@@ -49,10 +48,8 @@ function displayTimer(duration) {
       return;
     }
 
-    const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-    const minutes = Math.floor(
-      (remainingTime % (1000 * 60 * 60)) / (1000 * 60),
-    );
+    const seconds = Math.floor((remainingTime / 1000) % 60);
+    const minutes = Math.floor((remainingTime / (1000 * 60)) % 60);
     const hours = Math.floor(remainingTime / (1000 * 60 * 60));
 
     timerContainer.textContent = `${hours.toString().padStart(2, '0')}:${minutes
