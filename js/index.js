@@ -1,3 +1,7 @@
+const startButton = document.querySelector('.product_btn');
+const timerContainer = document.querySelector('.timer');
+const message = document.getElementById('message');
+
 function displayTimer(duration) {
   let endTime = localStorage.getItem('endTime');
   const currentTime = Date.now();
@@ -51,7 +55,7 @@ startButton.addEventListener('click', async () => {
   try {
     // Send request to start the timer
     const response = await fetch(
-      'https://dg-backend-9135cdee7c9e.herokuapp.com/start-timer/start-timer',
+      'https://dg-backend-9135cdee7c9e.herokuapp.com/start-timer',
       {
         method: 'POST',
         headers: {
