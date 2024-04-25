@@ -75,6 +75,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
+    console.log('token:', token);
+
     const response = await fetch(
       'https://dg-backend-9135cdee7c9e.herokuapp.com/start-timer/get-timer',
       {
