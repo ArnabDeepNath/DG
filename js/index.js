@@ -14,7 +14,7 @@ startButton.addEventListener('click', async () => {
 
     // Send request to start the timer
     const response = await fetch(
-      'https://dg-backend-9135cdee7c9e.herokuapp.com/timer',
+      'https://dg-backend-9135cdee7c9e.herokuapp.com/start-timer',
       {
         method: 'POST',
         headers: {
