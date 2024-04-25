@@ -25,7 +25,7 @@ startButton.addEventListener('click', async () => {
 
     if (response.ok) {
       // Timer started successfully, display countdown
-      displayTimer(duration);
+      displayTimer(Date.now(), duration);
       message.textContent = 'Timer started successfully.';
     } else {
       message.textContent = 'Failed to start timer.';
