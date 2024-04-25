@@ -159,8 +159,9 @@ body {
 .Product .timer {
   background: #def4c6;
   color: #1b512d;
-  font-size: large;
+  font-size: 18rem;
   font-weight: 500;
+  padding-left: 30%;
 }
 
 .About_us h1 {
