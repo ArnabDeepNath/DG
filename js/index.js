@@ -1,17 +1,9 @@
-function routeGuard() {
-  const token = localStorage.getItem('token');
-  if (!token) {
-    window.location.href = '/login.html'; // Redirect to login page if token is not present
-  }
-}
-
 const form = document.querySelector('.product');
 const timerContainer = document.querySelector('.timer');
 const message = document.getElementById('message');
+const startButton = document.querySelector('.product_btn');
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
+startButton.addEventListener('click', async () => {
   const formData = new FormData(form);
   const wish = formData.get('wish');
   const delayTime = parseInt(formData.get('delayTime'));
