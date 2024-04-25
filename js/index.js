@@ -4,11 +4,11 @@ const message = document.getElementById('message');
 const startButton = document.querySelector('.product_btn');
 
 startButton.addEventListener('click', async () => {
-  const formData = new FormData(form);
-  const wish = formData.get('wish');
-  const delayTime = parseInt(formData.get('delayTime'));
-
   try {
+    const formData = new FormData(form);
+    const wish = formData.get('wish');
+    const delayTime = parseInt(formData.get('delayTime'));
+
     // Send request to start the timer
     const response = await fetch(
       'https://dg-backend-9135cdee7c9e.herokuapp.com/start-timer',
@@ -17,7 +17,7 @@ startButton.addEventListener('click', async () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ wish: wish, delayTime: delayTime }), // Sending wish and delayTime in the body
+        body: JSON.stringify({ wish: wish, delayTime: delayTime }),
       },
     );
 
