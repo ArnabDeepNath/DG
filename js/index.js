@@ -25,7 +25,7 @@ form.addEventListener('submit', async (e) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ userId: 'user-id-here', duration: delayTime }),
+        body: JSON.stringify({ wish: wish, delayTime: delayTime }), // Sending wish and delayTime in the body
       },
     );
 
