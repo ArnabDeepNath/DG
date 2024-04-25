@@ -1,4 +1,4 @@
-const startButton = document.getElementById('.product_btn');
+const startButton = document.getElementById('product_btn');
 const timerContainer = document.querySelector('.timer');
 const message = document.getElementById('message');
 
