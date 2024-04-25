@@ -132,7 +132,7 @@ body {
   background-color: #1b512d;
   border-radius: 22px;
   padding: 25px;
-  margin: 30px;
+  /* margin: 30px; */
   display: flex;
   flex-direction: column;
 }
