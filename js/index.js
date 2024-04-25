@@ -44,7 +44,7 @@ function displayTimer(startTime, duration) {
     const remainingTime = endTime - currentTime; // Calculate remaining time in milliseconds
 
     if (remainingTime <= 0) {
-      timerContainer.textContent = 'Timer expired!';
+      timerContainer.textContent = 'You can fulfil your wish !';
       return;
     }
 
