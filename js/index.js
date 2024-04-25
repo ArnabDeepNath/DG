@@ -64,3 +64,63 @@ function displayTimer(duration) {
 
   updateTimer();
 }
+
+document.addEventListener('DOMContentLoaded', async () => {
+  try {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      // Redirect to login page if token is not present
+      window.location.href = '/login.html';
+      return;
+    }
+
+    const response = await fetch(
+      'https://dg-backend-9135cdee7c9e.herokuapp.com/get-timer',
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    if (response.ok) {
+      const timerData = await response.json();
+      displayTimer(timerData.startTime, timerData.duration);
+    } else {
+      console.error('Failed to fetch timer data');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
+});
+
+function displayTimer(startTime, duration) {
+  const endTime = startTime + duration * 1000; // Convert seconds to milliseconds
+
+  function updateTimer() {
+    const currentTime = Date.now();
+    const remainingTime = endTime - currentTime;
+
+    if (remainingTime <= 0) {
+      timerContainer.textContent = 'Timer expired!';
+      return;
+    }
+
+    const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+    const minutes = Math.floor(
+      (remainingTime % (1000 * 60 * 60)) / (1000 * 60),
+    );
+    const hours = Math.floor(remainingTime / (1000 * 60 * 60));
+
+    timerContainer.textContent = `${hours.toString().padStart(2, '0')}:${minutes
+      .toString()
+      .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+    requestAnimationFrame(updateTimer);
+  }
+
+  updateTimer();
+}
