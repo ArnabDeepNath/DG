@@ -96,31 +96,3 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('Error:', error);
   }
 });
-
-function displayTimer(startTime, duration) {
-  const endTime = startTime + duration * 1000; // Convert seconds to milliseconds
-
-  function updateTimer() {
-    const currentTime = Date.now();
-    const remainingTime = endTime - currentTime;
-
-    if (remainingTime <= 0) {
-      timerContainer.textContent = 'Timer expired!';
-      return;
-    }
-
-    const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
-    const minutes = Math.floor(
-      (remainingTime % (1000 * 60 * 60)) / (1000 * 60),
-    );
-    const hours = Math.floor(remainingTime / (1000 * 60 * 60));
-
-    timerContainer.textContent = `${hours.toString().padStart(2, '0')}:${minutes
-      .toString()
-      .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-    requestAnimationFrame(updateTimer);
-  }
-
-  updateTimer();
-}
