@@ -24,6 +24,7 @@ form.addEventListener('submit', async (e) => {
       // Store the token in local storage or session storage
       localStorage.setItem('token', data.token);
       message.textContent = 'Login successful.';
+      window.location.href = 'https://dg-delta.vercel.app/';
       form.reset();
     } else {
       message.textContent = data.message;
