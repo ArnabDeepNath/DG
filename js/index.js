@@ -1,13 +1,17 @@
 const form = document.querySelector('.product');
 const timerContainer = document.querySelector('.timer');
 const message = document.getElementById('message');
-const startButton = document.querySelector('.product_btn');
 
-startButton.addEventListener('click', async () => {
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const formData = new FormData(form);
+  const wish = formData.get('wish');
+  const delayTime = parseInt(formData.get('delayTime'));
+
   try {
-    const formData = new FormData(form);
-    const wish = formData.get('wish');
-    const delayTime = parseInt(formData.get('delayTime'));
+    // Get the token from localStorage
+    const token = localStorage.getItem('token');
 
     // Send request to start the timer
     const response = await fetch(
@@ -16,8 +20,9 @@ startButton.addEventListener('click', async () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`, // Include the token in the request headers
         },
-        body: JSON.stringify({ wish: wish, delayTime: delayTime }),
+        body: JSON.stringify({ duration: delayTime }),
       },
     );
 
