@@ -37,22 +37,24 @@ startButton.addEventListener('click', async () => {
 });
 
 function displayTimer(startTime, duration) {
-  const endTime = startTime + duration; // Duration is already in milliseconds
+  const endTime = startTime + duration * 1000; // Calculate endTime in milliseconds
 
   function updateTimer() {
-    const currentTime = Date.now();
-    const remainingTime = endTime - currentTime;
+    const currentTime = Date.now(); // Get the current time in milliseconds
+    const remainingTime = endTime - currentTime; // Calculate remaining time in milliseconds
 
     if (remainingTime <= 0) {
       timerContainer.textContent = 'Timer expired!';
       return;
     }
 
-    const seconds = Math.floor((remainingTime / 1000) % 60);
-    const minutes = Math.floor((remainingTime / (1000 * 60)) % 60);
+    const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
+    const minutes = Math.floor(
+      (remainingTime % (1000 * 60 * 60)) / (1000 * 60),
+    );
     const hours = Math.floor(remainingTime / (1000 * 60 * 60));
 
-    timerContainer.textContent = `${hours.toString().padStart(2, '0')}:${minutes
+    timerContainer.textContent = `${hours}:${minutes
       .toString()
       .padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
