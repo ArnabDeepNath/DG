@@ -13,17 +13,14 @@ startButton.addEventListener('click', async () => {
     const token = localStorage.getItem('token');
 
     // Send request to start the timer
-    const response = await fetch(
-      'https://dg-backend-9135cdee7c9e.herokuapp.com/start-timer',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`, // Include the token in the request headers
-        },
-        body: JSON.stringify({ duration: delayTime }),
+    const response = await fetch('/start-timer', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`, // Include the token in the request headers
       },
-    );
+      body: JSON.stringify({ duration: delayTime }),
+    });
 
     if (response.ok) {
       // Timer started successfully, display countdown
