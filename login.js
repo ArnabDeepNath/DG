@@ -9,17 +9,20 @@ form.addEventListener('submit', async (e) => {
   const password = formData.get('password');
 
   try {
-    const response = await fetch('/auth/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://dg-backend-9135cdee7c9e.herokuapp.com/auth/login',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email: email, password: password }),
       },
-      body: JSON.stringify({ email: email, password: password }),
-    });
+    );
     const data = await response.json();
     if (response.ok) {
       // Store the token in local storage or session storage
-      //   localStorage.setItem('token', data.token);
+      localStorage.setItem('token', data.token);
       message.textContent = 'Login successful.';
       form.reset();
     } else {
