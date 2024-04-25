@@ -7,7 +7,7 @@ async function fetchTimerData() {
     const response = await fetch(
       'https://dg-backend-9135cdee7c9e.herokuapp.com/start-timer/start-timer',
       {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
