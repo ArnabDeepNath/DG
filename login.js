@@ -19,7 +19,7 @@ form.addEventListener('submit', async (e) => {
     const data = await response.json();
     if (response.ok) {
       // Store the token in local storage or session storage
-      localStorage.setItem('token', data.token);
+      //   localStorage.setItem('token', data.token);
       message.textContent = 'Login successful.';
       form.reset();
     } else {
