@@ -19,7 +19,7 @@ startButton.addEventListener('click', async () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`, // Include the token in the request headers
         },
-        body: JSON.stringify({ wish, duration: delayTime }),
+        body: JSON.stringify({ wish, duration: delayTime, token: token }),
       },
     );
 
