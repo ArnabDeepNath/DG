@@ -15,7 +15,6 @@ form.addEventListener('submit', async (e) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': true,
         },
         body: JSON.stringify({ email: email, password: password }),
       },
