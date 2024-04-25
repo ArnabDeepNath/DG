@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     const response = await fetch(
-      'https://dg-backend-9135cdee7c9e.herokuapp.com/get-timer',
+      'https://dg-backend-9135cdee7c9e.herokuapp.com/start-timer/get-timer',
       {
         method: 'GET',
         headers: {
