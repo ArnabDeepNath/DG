@@ -1,17 +1,6 @@
-// index.js
-
 const startButton = document.querySelector('.product_btn');
 const timerContainer = document.querySelector('.timer');
 const message = document.getElementById('message');
-
-window.addEventListener('load', () => {
-  const token = localStorage.getItem('token');
-  if (token) {
-    console.log('Token:', token);
-  } else {
-    console.log('Token not found');
-  }
-});
 
 startButton.addEventListener('click', async () => {
   const wish = document.querySelector('input[name="wish"]').value;
@@ -20,24 +9,26 @@ startButton.addEventListener('click', async () => {
   );
 
   try {
+    // Get the token from localStorage
     const token = localStorage.getItem('token');
 
+    // Send request to start the timer
     const response = await fetch(
       'https://dg-backend-9135cdee7c9e.herokuapp.com/start-timer/start-timer',
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`, // Include the token in the request headers
         },
-        body: JSON.stringify({ duration: delayTime }),
+        body: JSON.stringify({ wish, duration: delayTime }), // Include the wish in the request body
       },
     );
 
     if (response.ok) {
+      // Timer started successfully, display countdown
       displayTimer(delayTime);
       message.textContent = 'Timer started successfully.';
-      localStorage.setItem('token', token);
     } else {
       message.textContent = 'Failed to start timer.';
     }
@@ -48,8 +39,8 @@ startButton.addEventListener('click', async () => {
 });
 
 function displayTimer(duration) {
-  const startTime = Date.now();
-  const endTime = startTime + duration * 1000;
+  const endTime = Date.now() + duration * 1000; // Calculate end time
+  updateTimer(); // Initial call to updateTimer
 
   function updateTimer() {
     const currentTime = Date.now();
@@ -72,6 +63,4 @@ function displayTimer(duration) {
 
     requestAnimationFrame(updateTimer);
   }
-
-  updateTimer();
 }
