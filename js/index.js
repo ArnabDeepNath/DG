@@ -44,6 +44,7 @@ function displayTimer(startTime, duration) {
     const remainingTime = endTime - currentTime; // Calculate remaining time in milliseconds
 
     if (remainingTime <= 0) {
+      deleteTimer();
       timerContainer.textContent = 'You can fulfil your wish !';
       return;
     }
@@ -62,6 +63,35 @@ function displayTimer(startTime, duration) {
   }
 
   updateTimer();
+}
+
+async function deleteTimer() {
+  try {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      console.error('Token not found.');
+      return;
+    }
+
+    const response = await fetch(
+      'https://dg-backend-9135cdee7c9e.herokuapp.com/start-timer/delete-timer',
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
+
+    if (response.ok) {
+      console.log('Timer entry deleted.');
+    } else {
+      console.error('Failed to delete timer entry.');
+    }
+  } catch (error) {
+    console.error('Error:', error);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
