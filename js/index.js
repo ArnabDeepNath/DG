@@ -1,13 +1,12 @@
-const form = document.querySelector('.product');
+const startButton = document.querySelector('.product_btn');
 const timerContainer = document.querySelector('.timer');
 const message = document.getElementById('message');
 
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const formData = new FormData(form);
-  const wish = formData.get('wish');
-  const delayTime = parseInt(formData.get('delayTime'));
+startButton.addEventListener('click', async () => {
+  const wish = document.querySelector('input[name="wish"]').value;
+  const delayTime = parseInt(
+    document.querySelector('input[name="delayTime"]').value,
+  );
 
   try {
     // Get the token from localStorage
@@ -30,7 +29,6 @@ form.addEventListener('submit', async (e) => {
       // Timer started successfully, display countdown
       displayTimer(delayTime);
       message.textContent = 'Timer started successfully.';
-      form.reset();
     } else {
       message.textContent = 'Failed to start timer.';
     }
