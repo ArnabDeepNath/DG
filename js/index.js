@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       {
         method: 'GET',
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `${token}`,
         },
       },
     );
