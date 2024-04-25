@@ -3,7 +3,7 @@ const timerContainer = document.querySelector('.timer');
 const message = document.getElementById('message');
 
 startButton.addEventListener('click', async () => {
-  const wish = document.getElementById('wishInput').value;
+  const wish = document.getElementById('wish').value;
   const delayTime = parseInt(document.getElementById('delayInput').value);
 
   try {
